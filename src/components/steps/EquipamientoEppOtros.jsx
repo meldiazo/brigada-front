@@ -16,6 +16,14 @@ const EquipamientoEppOtros = ({ onNext, onPrevious, data }) => {
     setStepData(prevData => ({ ...prevData, [name]: value }));
   };
 
+  const handleIncrementDecrement = (name, delta) => {
+    setStepData(prevData => {
+      const currentValue = parseInt(prevData[name]) || 0;
+      const newValue = Math.max(0, currentValue + delta);
+      return { ...prevData, [name]: newValue };
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onNext(stepData);
@@ -23,19 +31,24 @@ const EquipamientoEppOtros = ({ onNext, onPrevious, data }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Cuarta Sección: Equipamiento EPP</h2>
+      <h2>Equipamiento EPP (Otros)</h2>
       
       <div className="form-fields-grid">
         {Object.keys(stepData).filter(key => key !== 'observaciones').map(key => (
           <div key={key} className="form-field">
             <label htmlFor={key}>{key.replace(/([A-Z])/g, ' $1').toUpperCase()}</label>
-            <input
-              type="number"
-              id={key}
-              name={key}
-              value={stepData[key]}
-              onChange={handleChange}
-            />
+            <div className="input-with-buttons">
+              <button type="button" onClick={() => handleIncrementDecrement(key, -1)}>-</button>
+              <input
+                type="number"
+                min="0"
+                id={key}
+                name={key}
+                value={stepData[key]}
+                onChange={handleChange}
+              />
+              <button type="button" onClick={() => handleIncrementDecrement(key, 1)}>+</button>
+            </div>
           </div>
         ))}
       </div>

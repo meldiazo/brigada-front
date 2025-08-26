@@ -49,6 +49,27 @@ const Medicamentos = ({ onNext, onPrevious, data }) => {
     const { name, value } = e.target;
     setStepData(prevData => ({ ...prevData, [name]: value }));
   };
+  
+  const handleIncrementDecrement = (name, delta) => {
+    setStepData(prevData => {
+      const currentValue = parseInt(prevData[name]) || 0;
+      const newValue = Math.max(0, currentValue + delta);
+      return { ...prevData, [name]: newValue };
+    });
+  };
+
+  const formatLabel = (key) => {
+    // This regular expression adds a space before a capital letter
+    let formattedKey = key.replace(/([A-Z])/g, ' $1').toUpperCase();
+    // This replaces specific abbreviations
+    formattedKey = formattedKey.replace('ML', ' ML');
+    formattedKey = formattedKey.replace('G', ' G');
+    formattedKey = formattedKey.replace('MGS', ' MGS');
+    formattedKey = formattedKey.replace(' COMP', ' COMP');
+    formattedKey = formattedKey.replace('U', ' U');
+    formattedKey = formattedKey.replace('KG', ' KG');
+    return formattedKey;
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -57,19 +78,24 @@ const Medicamentos = ({ onNext, onPrevious, data }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Décima Primera Sección: Medicamentos</h2>
+      <h2>Medicamentos</h2>
 
       <div className="form-fields-grid">
         {Object.keys(stepData).filter(key => key !== 'observaciones').map(key => (
-          <div key={key} className="form-field" style={{ gridColumn: 'span 1' }}>
-            <label htmlFor={key}>{key.replace(/([A-Z])/g, ' $1').toUpperCase().replace('MG', ' MG').replace('ML', ' ML').replace('G', ' G')}</label>
-            <input
-              type="number"
-              id={key}
-              name={key}
-              value={stepData[key]}
-              onChange={handleChange}
-            />
+          <div key={key} className="form-field">
+            <label htmlFor={key}>{formatLabel(key)}</label>
+            <div className="input-with-buttons">
+              <button type="button" onClick={() => handleIncrementDecrement(key, -1)}>-</button>
+              <input
+                type="number"
+                min="0"
+                id={key}
+                name={key}
+                value={stepData[key]}
+                onChange={handleChange}
+              />
+              <button type="button" onClick={() => handleIncrementDecrement(key, 1)}>+</button>
+            </div>
           </div>
         ))}
       </div>

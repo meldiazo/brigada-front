@@ -23,17 +23,27 @@ const BotasGuantes = ({ onNext, onPrevious, data }) => {
     },
   });
 
-  const handleBotasChange = (talla, value) => {
-    setStepData(prevData => ({
-      ...prevData,
-      botas: { ...prevData.botas, [talla]: value }
-    }));
+  const handleIncrementDecrement = (item, talla, delta) => {
+    setStepData(prevData => {
+      const currentValue = parseInt(prevData[item][talla]) || 0;
+      const newValue = Math.max(0, currentValue + delta);
+      return {
+        ...prevData,
+        [item]: {
+          ...prevData[item],
+          [talla]: newValue
+        }
+      };
+    });
   };
 
-  const handleGuantesChange = (talla, value) => {
+  const handleChange = (item, talla, value) => {
     setStepData(prevData => ({
       ...prevData,
-      guantes: { ...prevData.guantes, [talla]: value }
+      [item]: {
+        ...prevData[item],
+        [talla]: value
+      }
     }));
   };
 
@@ -44,38 +54,54 @@ const BotasGuantes = ({ onNext, onPrevious, data }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Tercera Sección: Botas y Guantes</h2>
+      <h2>Botas y Guantes</h2>
 
-      <h3>Botas para Bomberos Forestales</h3>
-      <div className="form-fields-grid">
-        {Object.keys(stepData.botas).map(talla => (
-          <div key={talla} className="form-field">
-            <label htmlFor={`botas-${talla}`}>{talla.replace('talla', 'Talla ')}</label>
-            <input
-              type="number"
-              id={`botas-${talla}`}
-              value={stepData.botas[talla]}
-              onChange={(e) => handleBotasChange(talla, e.target.value)}
-            />
+      <div className="section-group">
+        <div className="section-sub-group">
+          <h3>Botas para Bomberos Forestales</h3>
+          <div className="form-fields-grid">
+            {Object.keys(stepData.botas).map(talla => (
+              <div key={talla} className="form-field">
+                <label htmlFor={`botas-${talla}`}>{talla.replace('talla', 'Talla ')}</label>
+                <div className="input-with-buttons">
+                  <button type="button" onClick={() => handleIncrementDecrement('botas', talla, -1)}>-</button>
+                  <input
+                    type="number"
+                    min="0"
+                    id={`botas-${talla}`}
+                    value={stepData.botas[talla]}
+                    onChange={(e) => handleChange('botas', talla, e.target.value)}
+                  />
+                  <button type="button" onClick={() => handleIncrementDecrement('botas', talla, 1)}>+</button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </div>
+        
+        <div className="vertical-divider"></div>
 
-      <hr style={{ margin: '30px 0' }} />
-
-      <h3>Guantes de Cuero</h3>
-      <div className="form-fields-grid">
-        {Object.keys(stepData.guantes).map(talla => (
-          <div key={talla} className="form-field">
-            <label htmlFor={`guantes-${talla}`}>{talla.toUpperCase().replace('OTRATALLA', 'OTRA TALLA')}</label>
-            <input
-              type="number"
-              id={`guantes-${talla}`}
-              value={stepData.guantes[talla]}
-              onChange={(e) => handleGuantesChange(talla, e.target.value)}
-            />
+        <div className="section-sub-group">
+          <h3>Guantes de Cuero</h3>
+          <div className="form-fields-grid">
+            {Object.keys(stepData.guantes).map(talla => (
+              <div key={talla} className="form-field">
+                <label htmlFor={`guantes-${talla}`}>{talla.toUpperCase().replace('OTRATALLA', 'OTRA TALLA')}</label>
+                <div className="input-with-buttons">
+                  <button type="button" onClick={() => handleIncrementDecrement('guantes', talla, -1)}>-</button>
+                  <input
+                    type="number"
+                    min="0"
+                    id={`guantes-${talla}`}
+                    value={stepData.guantes[talla]}
+                    onChange={(e) => handleChange('guantes', talla, e.target.value)}
+                  />
+                  <button type="button" onClick={() => handleIncrementDecrement('guantes', talla, 1)}>+</button>
+                </div>
+              </div>
+            ))}
           </div>
-        ))}
+        </div>
       </div>
 
       <div className="form-buttons">

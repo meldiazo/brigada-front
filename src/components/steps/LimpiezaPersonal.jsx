@@ -17,6 +17,14 @@ const LimpiezaPersonal = ({ onNext, onPrevious, data }) => {
     setStepData(prevData => ({ ...prevData, [name]: value }));
   };
 
+  const handleIncrementDecrement = (name, delta) => {
+    setStepData(prevData => {
+      const currentValue = parseInt(prevData[name]) || 0;
+      const newValue = Math.max(0, currentValue + delta);
+      return { ...prevData, [name]: newValue };
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onNext(stepData);
@@ -24,84 +32,119 @@ const LimpiezaPersonal = ({ onNext, onPrevious, data }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Novena Sección: Limpieza Personal</h2>
+      <h2>Limpieza Personal</h2>
 
       <div className="form-fields-grid">
         <div className="form-field">
           <label htmlFor="shampooEnvasePequenos">SHAMPOO ENVASES PEQUEÑOS O SACHET</label>
-          <input
-            type="number"
-            id="shampooEnvasePequenos"
-            name="shampooEnvasePequenos"
-            value={stepData.shampooEnvasePequenos}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('shampooEnvasePequenos', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="shampooEnvasePequenos"
+              name="shampooEnvasePequenos"
+              value={stepData.shampooEnvasePequenos}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('shampooEnvasePequenos', 1)}>+</button>
+          </div>
         </div>
         
         <div className="form-field">
           <label htmlFor="jabonciilos">JABONCILLOS</label>
-          <input
-            type="number"
-            id="jabonciilos"
-            name="jabonciilos"
-            value={stepData.jabonciilos}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('jabonciilos', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="jabonciilos"
+              name="jabonciilos"
+              value={stepData.jabonciilos}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('jabonciilos', 1)}>+</button>
+          </div>
         </div>
 
         <div className="form-field">
           <label htmlFor="pastaDental">PASTA DENTAL</label>
-          <input
-            type="number"
-            id="pastaDental"
-            name="pastaDental"
-            value={stepData.pastaDental}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('pastaDental', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="pastaDental"
+              name="pastaDental"
+              value={stepData.pastaDental}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('pastaDental', 1)}>+</button>
+          </div>
         </div>
         
         <div className="form-field">
           <label htmlFor="cepilloDeDientes">CEPILLO DE DIENTES</label>
-          <input
-            type="number"
-            id="cepilloDeDientes"
-            name="cepilloDeDientes"
-            value={stepData.cepilloDeDientes}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('cepilloDeDientes', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="cepilloDeDientes"
+              name="cepilloDeDientes"
+              value={stepData.cepilloDeDientes}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('cepilloDeDientes', 1)}>+</button>
+          </div>
         </div>
         
         <div className="form-field">
           <label htmlFor="toallasHumedas">TOALLAS HÚMEDAS</label>
-          <input
-            type="number"
-            id="toallasHumedas"
-            name="toallasHumedas"
-            value={stepData.toallasHumedas}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('toallasHumedas', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="toallasHumedas"
+              name="toallasHumedas"
+              value={stepData.toallasHumedas}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('toallasHumedas', 1)}>+</button>
+          </div>
         </div>
         
         <div className="form-field">
           <label htmlFor="toallasHigienicas">TOALLAS HIGIÉNICAS</label>
-          <input
-            type="number"
-            id="toallasHigienicas"
-            name="toallasHigienicas"
-            value={stepData.toallasHigienicas}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('toallasHigienicas', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="toallasHigienicas"
+              name="toallasHigienicas"
+              value={stepData.toallasHigienicas}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('toallasHigienicas', 1)}>+</button>
+          </div>
         </div>
 
         <div className="form-field">
           <label htmlFor="papelHigienico">PAPEL HIGIÉNICO</label>
-          <input
-            type="number"
-            id="papelHigienico"
-            name="papelHigienico"
-            value={stepData.papelHigienico}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('papelHigienico', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="papelHigienico"
+              name="papelHigienico"
+              value={stepData.papelHigienico}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('papelHigienico', 1)}>+</button>
+          </div>
         </div>
       </div>
 

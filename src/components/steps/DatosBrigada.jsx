@@ -21,6 +21,15 @@ const DatosBrigada = ({ onNext, data, onPrevious, currentStep }) => {
     }));
   };
 
+  // Agrega esta función dentro de cada componente de paso (justo después de handleChange)
+  const handleIncrementDecrement = (name, delta) => {
+    setStepData(prevData => {
+      const currentValue = parseInt(prevData[name]) || 0;
+      const newValue = Math.max(0, currentValue + delta); // Asegura que no sea menor que 0
+      return { ...prevData, [name]: newValue };
+    });
+};
+
   const handleSubmit = (e) => {
     e.preventDefault();
     // Validación básica: asegura que al menos el nombre de la brigada no esté vacío
@@ -34,7 +43,7 @@ const DatosBrigada = ({ onNext, data, onPrevious, currentStep }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Primera Sección: Datos de la Brigada</h2>
+      <h2>Datos de la Brigada</h2>
       
       <div className="form-fields-grid">
         {/* Campo 1: Nombre de la Brigada */}
@@ -54,14 +63,20 @@ const DatosBrigada = ({ onNext, data, onPrevious, currentStep }) => {
         {/* Campo 2: Cantidad de Bomberos Activos */}
         <div className="form-field">
           <label htmlFor="cantidadBomberos">CANTIDAD DE BOMBEROS ACTIVOS</label>
-          <input
-            type="number"
-            id="cantidadBomberos"
-            name="cantidadBomberos"
-            value={stepData.cantidadBomberos}
-            onChange={handleChange}
-            placeholder="Ej: 25"
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('cantidadBomberos', -1)}>-</button>
+            <input
+                type="number"
+                min="0"
+                id="cantidadBomberos"
+                name="cantidadBomberos"
+                value={stepData.cantidadBomberos}
+                onChange={handleChange}
+                placeholder="Ej: 25"
+                required
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('cantidadBomberos', 1)}>+</button>
+        </div>
         </div>
         
         {/* Campo 3: Contacto Celular Comandante */}
@@ -74,6 +89,7 @@ const DatosBrigada = ({ onNext, data, onPrevious, currentStep }) => {
             value={stepData.contactoComandante}
             onChange={handleChange}
             placeholder="Ej: 555-12345"
+            required
           />
         </div>
 
@@ -87,6 +103,7 @@ const DatosBrigada = ({ onNext, data, onPrevious, currentStep }) => {
             value={stepData.encargadoLogistica}
             onChange={handleChange}
             placeholder="Ej: Juan Pérez"
+            required
           />
         </div>
 
@@ -100,6 +117,7 @@ const DatosBrigada = ({ onNext, data, onPrevious, currentStep }) => {
             value={stepData.contactoLogistica}
             onChange={handleChange}
             placeholder="Ej: 555-67890"
+            required
           />
         </div>
         

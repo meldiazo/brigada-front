@@ -33,6 +33,22 @@ const stepsComponents = [
   RescateAnimal,
 ];
 
+// Nombres de las claves para cada sección del formulario
+const stepKeys = [
+  'datosBrigada',
+  'equipamientoEppRopa',
+  'botasGuantes',
+  'equipamientoEppOtros',
+  'herramientas',
+  'logisticaVehiculos',
+  'alimentacionYbebidas',
+  'logisticaYEquipoDeCampo',
+  'limpiezaPersonal',
+  'limpiezaGeneral',
+  'medicamentos',
+  'rescateAnimal',
+];
+
 function App() {
   const [currentStep, setCurrentStep] = useState(1);
   const [formData, setFormData] = useState({});
@@ -40,12 +56,17 @@ function App() {
   const totalSteps = stepsComponents.length;
 
   const handleNextStep = (data) => {
-    setFormData((prevData) => ({ ...prevData, ...data }));
+    const currentStepKey = stepKeys[currentStep - 1];
+    setFormData((prevData) => ({ 
+      ...prevData, 
+      [currentStepKey]: data 
+    }));
     
     if (currentStep < totalSteps) {
       setCurrentStep(currentStep + 1);
     } else {
-      console.log("¡Formulario Completo! Datos finales:", { ...formData, ...data });
+      const finalData = { ...formData, [currentStepKey]: data };
+      console.log("¡Formulario Completo! Datos finales:", finalData);
       
       // Aquí es donde harás la llamada a la API de tu compañero:
       // fetch('URL_DE_LA_API_DE_TU_COMPAÑERO', {
@@ -53,7 +74,7 @@ function App() {
       //   headers: {
       //     'Content-Type': 'application/json',
       //   },
-      //   body: JSON.stringify({ ...formData, ...data }),
+      //   body: JSON.stringify(finalData),
       // })
       // .then(response => response.json())
       // .then(data => console.log('Éxito:', data))
@@ -70,6 +91,8 @@ function App() {
   };
 
   const StepComponent = stepsComponents[currentStep - 1];
+  const currentStepKey = stepKeys[currentStep - 1];
+  const currentStepData = formData[currentStepKey] || {};
 
   return (
     <div className="app-layout">
@@ -80,7 +103,7 @@ function App() {
             <StepComponent 
               onNext={handleNextStep} 
               onPrevious={handlePreviousStep} 
-              data={formData} 
+              data={currentStepData} 
               isLastStep={currentStep === totalSteps}
               currentStep={currentStep}
             />

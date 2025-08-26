@@ -4,7 +4,7 @@
 body {
     margin: 0;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
-    background-color: #f4f4f7; /* Fondo gris claro */
+    background-color: #E8EDF4; /* Fondo gris claro */
 }
 
 /* Diseño de dos columnas (Layout) */
@@ -27,8 +27,8 @@ body {
     padding: 40px 50px;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    width: 100%;
-    max-width: 800px; /* Limitar el ancho para que no se vea demasiado grande */
+    width: fit-content;
+   /* max-width: 800px;  Limitar el ancho para que no se vea demasiado grande */
 }
 
 /* Estilos de Botones */
@@ -49,21 +49,21 @@ body {
 }
 
 .form-buttons .btn-next {
-    background-color: #8c7ae6; /* Morado/Púrpura */
+    background-color: #E63946; /* Rojo brillante */
     color: white;
 }
 
 .form-buttons .btn-next:hover {
-    background-color: #7a6bc4;
+    background-color: #b32a35;
 }
 
 .form-buttons .btn-back {
-    background-color: #f0f0f0;
-    color: #333;
+    background-color: #E8EDF4; /* Gris claro */
+    color: #2F3640; /* Gris oscuro */
 }
 
 .form-buttons .btn-back:hover {
-    background-color: #e0e0e0;
+    background-color: #d1d6de;
 }
 
 /* Estilos de Campos de Entrada */
@@ -101,9 +101,9 @@ body {
 
 .form-field input:focus,
 .form-field textarea:focus {
-    border-color: #8c7ae6;
+    border-color: #E63946;
     outline: none;
-    box-shadow: 0 0 0 2px rgba(140, 122, 230, 0.2);
+    box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
 }
 
 .form-field.full-width {
@@ -112,11 +112,19 @@ body {
 
 /* Títulos de sección */
 h2 {
-    color: #383141;
+    color: #2F3640; /* Gris oscuro */
     margin-top: 0;
     margin-bottom: 30px;
     font-weight: 600;
     font-size: 1.8em;
+}
+
+h3 {
+    color: #2F3640; /* Gris oscuro */
+    margin-top: 0;
+    margin-bottom: 30px;
+    font-weight: 600;
+    font-size: 1.2em;
 }
 
 /* Estilos de la tabla de la Sección 2 (Ropa) */
@@ -134,11 +142,12 @@ h2 {
   border: 1px solid #ddd;
   padding: 8px;
   text-align: center;
-  background-color: #3831419d;
+  background-color: #2F3640;
 }
 
 .table-responsive th {
-  background-color: #383141;
+  background-color: #2F3640;
+  color: white;
   font-weight: 600;
 }
 
@@ -152,7 +161,7 @@ h2 {
 /* --- ESTILOS ADICIONALES PARA STEP INDICATOR (fusionados) --- */
 
 .step-indicator-container {
-    background-color: #383141; /* Color oscuro similar al template */
+    background-color: #1E1E1E; /* Negro para mayor contraste */
     color: #fff;
     padding: 30px;
     width: 300px; /* Ancho fijo para el menú lateral */
@@ -165,10 +174,10 @@ h2 {
 }
 
 .logo {
-    font-size: 1.5em;
+    font-size: 1.8em;
     font-weight: 600;
-    margin-bottom: 50px;
-    color: #a0a0a0;
+    margin-bottom: 40px;
+    color: #A0A0A0; /* Gris claro */
 }
 
 .step-list {
@@ -194,7 +203,7 @@ h2 {
     height: 30px;
     border-radius: 50%;
     background-color: transparent;
-    border: 2px solid #a0a0a0;
+    border: 2px solid #A0A0A0; /* Gris claro */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -204,8 +213,8 @@ h2 {
 }
 
 .step-item.active .step-number-circle {
-    background-color: #8c7ae6; /* Color morado del template */
-    border-color: #8c7ae6;
+    background-color: #E63946; /* Rojo brillante */
+    border-color: #E63946;
     color: white;
 }
 
@@ -221,13 +230,13 @@ h2 {
 
 .step-description {
     font-size: 0.8em;
-    color: #a0a0a0;
+    color: #A0A0A0; /* Gris claro */
     line-height: 1.3;
 }
 
 .help-section {
     font-size: 0.9em;
-    color: #a0a0a0;
+    color: #A0A0A0; /* Gris claro */
     padding-top: 20px;
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     text-align: left;
@@ -240,4 +249,82 @@ h2 {
 .help-section .icon-container {
     font-size: 1.5em;
     margin-top: 5px;
+}
+
+/* Ocultar las flechas de los input de tipo number */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield; /* Para Firefox */
+}
+
+/* Contenedor del input con los botones */
+.input-with-buttons {
+  display: flex;
+  align-items: center;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  transition: border-color 0.2s;
+}
+
+.input-with-buttons:focus-within {
+  border-color: #E63946;
+  box-shadow: 0 0 0 2px rgba(230, 57, 70, 0.2);
+}
+
+.input-with-buttons input {
+  flex-grow: 1;
+  border: none;
+  text-align: center;
+  padding: 10px 5px;
+  font-size: 1em;
+  width: 100%;
+}
+
+.input-with-buttons input:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.input-with-buttons button {
+  background-color: #E63946; /* Rojo brillante */
+  border: none;
+  color: white;
+  padding: 10px 15px;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.input-with-buttons button:hover {
+  background-color: #b32a35;
+}
+
+/* Nuevos estilos para la sección de Botas y Guantes */
+.section-group {
+    display: flex;
+    gap: 20px;
+    width: 100%;
+    align-items: stretch; 
+    justify-content: space-between; 
+}
+
+.section-sub-group {
+    flex: 1;
+}
+
+.section-sub-group h3 {
+  margin-top: 0;
+  margin-bottom: 20px;
+}
+
+.vertical-divider {
+    width: 2px; 
+    background-color: #DCDCDC; /* Gris humo para el divisor */
+    height: auto; 
+    margin: 0 30px; 
 }

@@ -30,7 +30,7 @@ const StepIndicator = ({ currentStep }) => {
               <div className="step-number-circle">{stepNumber}</div>
               <div className="step-content">
                 <div className="step-title">{title}</div>
-                <div className="step-description">Completa esta sección para continuar.</div>
+                <div className="step-description">Revisa la sección antes de continuar.</div>
               </div>
             </div>
           );
@@ -38,7 +38,7 @@ const StepIndicator = ({ currentStep }) => {
       </div>
       <div className="help-section">
         <p>¿Necesitas ayuda?</p>
-        <p>chat con soporte en vivo</p>
+        <p>+591 77777777</p>
         <div className="icon-container">🎧</div>
       </div>
     </div>

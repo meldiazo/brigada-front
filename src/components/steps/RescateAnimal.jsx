@@ -11,6 +11,14 @@ const RescateAnimal = ({ onNext, onPrevious, data, isLastStep }) => {
     setStepData(prevData => ({ ...prevData, [name]: value }));
   };
 
+  const handleIncrementDecrement = (name, delta) => {
+    setStepData(prevData => {
+      const currentValue = parseInt(prevData[name]) || 0;
+      const newValue = Math.max(0, currentValue + delta);
+      return { ...prevData, [name]: newValue };
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onNext(stepData);
@@ -18,18 +26,23 @@ const RescateAnimal = ({ onNext, onPrevious, data, isLastStep }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Décima Segunda Sección: Rescate Animal</h2>
+      <h2>Rescate Animal</h2>
 
       <div className="form-fields-grid">
         <div className="form-field full-width">
           <label htmlFor="alimentosParaAnimales">ALIMENTOS PARA ANIMALES</label>
-          <input
-            type="number"
-            id="alimentosParaAnimales"
-            name="alimentosParaAnimales"
-            value={stepData.alimentosParaAnimales}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('alimentosParaAnimales', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="alimentosParaAnimales"
+              name="alimentosParaAnimales"
+              value={stepData.alimentosParaAnimales}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('alimentosParaAnimales', 1)}>+</button>
+          </div>
         </div>
       </div>
       

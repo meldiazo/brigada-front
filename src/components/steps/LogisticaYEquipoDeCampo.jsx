@@ -13,6 +13,14 @@ const LogisticaYEquipoDeCampo = ({ onNext, onPrevious, data }) => {
     setStepData(prevData => ({ ...prevData, [name]: value }));
   };
 
+  const handleIncrementDecrement = (name, delta) => {
+    setStepData(prevData => {
+      const currentValue = parseInt(prevData[name]) || 0;
+      const newValue = Math.max(0, currentValue + delta);
+      return { ...prevData, [name]: newValue };
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onNext(stepData);
@@ -20,40 +28,55 @@ const LogisticaYEquipoDeCampo = ({ onNext, onPrevious, data }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Octava Sección: Logística y Equipo de Campo</h2>
+      <h2>Logística y Equipo de Campo</h2>
 
       <div className="form-fields-grid">
         <div className="form-field">
           <label htmlFor="colchoneta">COLCHONETA</label>
-          <input
-            type="number"
-            id="colchoneta"
-            name="colchoneta"
-            value={stepData.colchoneta}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('colchoneta', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="colchoneta"
+              name="colchoneta"
+              value={stepData.colchoneta}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('colchoneta', 1)}>+</button>
+          </div>
         </div>
         
         <div className="form-field">
           <label htmlFor="sleeping">SLEEPING</label>
-          <input
-            type="number"
-            id="sleeping"
-            name="sleeping"
-            value={stepData.sleeping}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('sleeping', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="sleeping"
+              name="sleeping"
+              value={stepData.sleeping}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('sleeping', 1)}>+</button>
+          </div>
         </div>
 
         <div className="form-field">
           <label htmlFor="camping">CAMPING</label>
-          <input
-            type="number"
-            id="camping"
-            name="camping"
-            value={stepData.camping}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('camping', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="camping"
+              name="camping"
+              value={stepData.camping}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('camping', 1)}>+</button>
+          </div>
         </div>
       </div>
 

@@ -12,6 +12,14 @@ const LimpiezaGeneral = ({ onNext, onPrevious, data }) => {
     setStepData(prevData => ({ ...prevData, [name]: value }));
   };
 
+  const handleIncrementDecrement = (name, delta) => {
+    setStepData(prevData => {
+      const currentValue = parseInt(prevData[name]) || 0;
+      const newValue = Math.max(0, currentValue + delta);
+      return { ...prevData, [name]: newValue };
+    });
+  };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     onNext(stepData);
@@ -19,29 +27,39 @@ const LimpiezaGeneral = ({ onNext, onPrevious, data }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Décima Sección: Limpieza General</h2>
+      <h2>Limpieza General</h2>
 
       <div className="form-fields-grid">
         <div className="form-field">
           <label htmlFor="ace">ACE</label>
-          <input
-            type="number"
-            id="ace"
-            name="ace"
-            value={stepData.ace}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('ace', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="ace"
+              name="ace"
+              value={stepData.ace}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('ace', 1)}>+</button>
+          </div>
         </div>
         
         <div className="form-field">
           <label htmlFor="lavandina">LAVANDINA</label>
-          <input
-            type="number"
-            id="lavandina"
-            name="lavandina"
-            value={stepData.lavandina}
-            onChange={handleChange}
-          />
+          <div className="input-with-buttons">
+            <button type="button" onClick={() => handleIncrementDecrement('lavandina', -1)}>-</button>
+            <input
+              type="number"
+              min="0"
+              id="lavandina"
+              name="lavandina"
+              value={stepData.lavandina}
+              onChange={handleChange}
+            />
+            <button type="button" onClick={() => handleIncrementDecrement('lavandina', 1)}>+</button>
+          </div>
         </div>
       </div>
 
