@@ -83,7 +83,8 @@ const DatosBrigada = ({ onNext, data, onPrevious, currentStep }) => {
         <div className="form-field">
           <label htmlFor="contactoComandante">CONTACTO CELULAR COMANDANTE</label>
           <input
-            type="tel"
+            type="number"
+            min="0"
             id="contactoComandante"
             name="contactoComandante"
             value={stepData.contactoComandante}
@@ -111,7 +112,8 @@ const DatosBrigada = ({ onNext, data, onPrevious, currentStep }) => {
         <div className="form-field">
           <label htmlFor="contactoLogistica">CONTACTO CELULAR LOGÍSTICA</label>
           <input
-            type="tel"
+            type="number"
+            min="0"
             id="contactoLogistica"
             name="contactoLogistica"
             value={stepData.contactoLogistica}
@@ -125,7 +127,8 @@ const DatosBrigada = ({ onNext, data, onPrevious, currentStep }) => {
         <div className="form-field">
           <label htmlFor="numeroEmergencia">NÚMERO DE EMERGENCIA PÚBLICO (SI LO TIENE)</label>
           <input
-            type="tel"
+            type="number"
+            min="0"
             id="numeroEmergencia"
             name="numeroEmergencia"
             value={stepData.numeroEmergencia}
